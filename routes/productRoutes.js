@@ -8,6 +8,7 @@ const router = express.Router();
 router.post("/", async (req, res) => {
   try {
     const newProduct = await Product.create(req.body);
+    console.log("Created Product:", newProduct);
     return res.status(201).json(newProduct);
   } catch (error) {
     // Validation errors from Mongoose
@@ -57,6 +58,8 @@ router.get("/", async (req, res) => {
       .skip(skip)
       .limit(limitNum);
 
+    console.log("Retrieved Products:", products);
+
     return res.status(200).json(products);
   } catch (error) {
     return res.status(500).json({ message: "Server error", error: error.message });
@@ -77,6 +80,8 @@ router.get("/:id", async (req, res) => {
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }
+
+    console.log("Retrieved Product:", product);
 
     return res.status(200).json(product);
   } catch (error) {
@@ -101,6 +106,8 @@ router.put("/:id", async (req, res) => {
     if (!updated) {
       return res.status(404).json({ message: "Product not found" });
     }
+
+    console.log("Updated Product:", updated);
 
     return res.status(200).json(updated);
   } catch (error) {
@@ -128,7 +135,7 @@ router.delete("/:id", async (req, res) => {
     if (!deleted) {
       return res.status(404).json({ message: "Product not found" });
     }
-
+    console.log("Deleted Product:", deleted);
     return res.status(200).json({ message: "Product deleted successfully" });
   } catch (error) {
     return res.status(500).json({ message: "Server error", error: error.message });
