@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true })); //industrial strength parsing
 
 // Routes
 app.get("/", (req, res) => {
- res.send(`
+  res.send(`
   <h1>Zenith Product API</h1>
 
   <h2>How to Test the API</h2>
@@ -25,6 +25,14 @@ app.get("/", (req, res) => {
   </p>
 
   <h3>1. Create Product (POST)</h3>
+
+  <pre>{
+  "name": "Rocky",
+  "description": "Dewan Mahmud test product",
+  "price": 10,
+  "category": "test"
+}</pre>
+ 
   <p>
     POST /api/products<br/>
     I sent valid product data and received a 201 status with the created product.<br/>
@@ -70,8 +78,6 @@ app.get("/", (req, res) => {
 
   <p><strong>Try the API:</strong> <a href="/api/products">/api/products</a></p>
 `);
-
-  
 });
 
 app.use("/api/products", productRoutes);
